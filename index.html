@@ -22,5 +22,5 @@ else{(async function(){try{var s=sessionStorage.getItem("gk");if(s)show(await op
 document.getElementById("f").addEventListener("submit",async function(e){e.preventDefault();m.textContent="";b.disabled=true;
  try{var raw=await keyFrom(p.value.trim().toLowerCase());var out=await open_(raw);
   try{sessionStorage.setItem("gk",btoa(String.fromCharCode.apply(null,raw)))}catch(e){}
-  show(out)}catch(err){m.textContent="Пароль не подошёл.";b.disabled=false;p.select()}});
+  try{history.replaceState(null,"","#start")}catch(e){location.hash="start"}show(out)}catch(err){m.textContent="Пароль не подошёл.";b.disabled=false;p.select()}});
 </script></body></html>
