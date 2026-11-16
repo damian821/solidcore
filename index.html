@@ -18,7 +18,7 @@ async function open_(raw){var k=await crypto.subtle.importKey("raw",raw,"AES-GCM
  return crypto.subtle.decrypt({name:"AES-GCM",iv:u(I)},k,u(C))}
 var m=document.getElementById("m"),b=document.getElementById("b"),p=document.getElementById("p");
 if(!(window.crypto&&crypto.subtle)){m.textContent="Откройте страницу по адресу, который начинается с https://";b.disabled=true}
-else{(async function(){try{var s=sessionStorage.getItem("gk");if(s)show(await open_(u(s)))}catch(e){}})()}
+else{(async function(){try{var s=sessionStorage.getItem("gk");if(s){var o=await open_(u(s));try{history.replaceState(null,"","#start")}catch(e){location.hash="start"}show(o)}}catch(e){}})()}
 document.getElementById("f").addEventListener("submit",async function(e){e.preventDefault();m.textContent="";b.disabled=true;
  try{var raw=await keyFrom(p.value.trim().toLowerCase());var out=await open_(raw);
   try{sessionStorage.setItem("gk",btoa(String.fromCharCode.apply(null,raw)))}catch(e){}
